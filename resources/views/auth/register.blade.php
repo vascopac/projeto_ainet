@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -60,6 +60,36 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="phoneNumber" class="col-md-4 col-form-label text-md-right">{{ __('Phone number') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="phoneNumber" type="text" class="form-control{{ $errors->has('phoneNumber') ? ' is-invalid' : '' }}" name="phoneNumber">
+
+                                @if ($errors->has('phoneNumber'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('phoneNumber') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="profile_photo" class="col-md-4 col-form-label text-md-right">{{ __('Photo') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="file" name="fileToUpload" id="fileToUpload">
+
+                                @if ($errors->has('profile_photo'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('profile_photo') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

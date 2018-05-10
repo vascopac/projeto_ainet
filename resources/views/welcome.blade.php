@@ -83,9 +83,9 @@
                 </div>
 
                 <div class="statistics">
-                    <p>Total registered users: 0</p>
-                    <p>Total number of accounts: 0</p>
-                    <p>Movements registered on the plataform: 0</p>
+                    <p>Total registered users: {{ $statistics['users']}}</p>
+                    <p>Total number of accounts: {{ $statistics['accounts']}}</p>
+                    <p>Movements registered on the plataform: {{ $statistics['movements']}}</p>
                 </div>
             </div>
         </div>

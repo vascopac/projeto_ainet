@@ -10,9 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\User; 
 
 Route::get('/', function () {
-    return view('welcome');
+	$statistics = [
+        'users' => User::count(),
+        'accounts' => DB::table('accounts')->count(),
+        'movements' => DB::table('movements')->count(),
+    ];
+    return view('welcome', compact('statistics'));
 });
 
 Auth::routes();
