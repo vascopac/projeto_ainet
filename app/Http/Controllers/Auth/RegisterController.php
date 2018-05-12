@@ -53,7 +53,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:3|confirmed',
             'phone' => 'nullable|regex:/(9)[0-9]{8}/',
             'profile_photo' => 'nullable|mimes:jpeg,bmp,png',
         ]);
@@ -67,16 +67,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if (request()->file('profile_photo')->isValid()) {
-            $path= Storage::putFile('public/profiles', request()->file('profile_photo'));
+        $path = null;
+        if (!empty(request()->file('profile_photo'))) {
+            if (request()->file('profile_photo')->isValid()) {
+                $path= Storage::putFile('public/profiles', request()->file('profile_photo'));
+            }
         }
+        
 
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'],
-            'profile_photo' => str_replace_first('public/profiles/', '', $path),
+            'profile_photo' => $path != null ? str_replace_first('public/profiles/', '', $path) : null,
         ]);
     }
 }
