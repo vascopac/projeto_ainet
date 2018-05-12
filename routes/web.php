@@ -14,7 +14,7 @@ use App\User;
 
 Route::get('/', function () {
 	$statistics = [
-        'users' => User::count(),
+        'users' => DB::table('users')->count(),
         'accounts' => DB::table('accounts')->count(),
         'movements' => DB::table('movements')->count(),
     ];
