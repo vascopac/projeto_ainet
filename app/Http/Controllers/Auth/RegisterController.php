@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -65,12 +67,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if (request()->file('profile_photo')->isValid()) {
+            $path= Storage::putFile('public/profiles', request()->file('profile_photo'));
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'],
-            //'profile_photo' => $data['profile_photo'],
+            'profile_photo' => str_replace_first('public/profiles/', '', $path),
         ]);
     }
 }

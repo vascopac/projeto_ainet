@@ -79,7 +79,7 @@
                             <label for="profile_photo" class="col-md-4 col-form-label text-md-right">{{ __('Photo') }}</label>
 
                             <div class="col-md-6">
-                                <input type="file" name="fileToUpload" id="fileToUpload">
+                                <input type="file" name="profile_photo" id="fileToUpload">
 
                                 @if ($errors->has('profile_photo'))
                                     <span class="invalid-feedback">

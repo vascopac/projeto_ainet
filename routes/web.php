@@ -12,14 +12,7 @@
 */
 use App\User; 
 
-Route::get('/', function () {
-	$statistics = [
-        'users' => DB::table('users')->count(),
-        'accounts' => DB::table('accounts')->count(),
-        'movements' => DB::table('movements')->count(),
-    ];
-    return view('welcome', compact('statistics'));
-});
+Route::get('/', 'WelcomeController@statistics');
 
 Auth::routes();
 
