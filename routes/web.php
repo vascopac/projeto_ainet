@@ -18,6 +18,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+Route::get('/users', 'UserController@index')->name('list');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::patch('/users/{user}/promote', 'UserController@promote')->name('user_promote');
+
+Route::patch('/users/{user}/demote', 'UserController@demote')->name('user_demote');
+
+Route::patch('/users/{user}/block', 'UserController@block')->name('user_block');
+
+Route::patch('/users/{user}/unblock', 'UserController@unblock')->name('user_unblock');
+
