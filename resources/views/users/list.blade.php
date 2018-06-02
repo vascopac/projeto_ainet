@@ -33,34 +33,34 @@
         @endif
             <td>
                 @if ($user->admin === 0)
-                    <form action="{{ route('user_promote', $user->id) }}" method="POST" role="form" class="inline">
+                    <form action="{{ route('user_promote', $user) }}" method="POST" role="form" class="inline">
                         @method('PATCH')
                         @csrf
-                        <input type="hidden" name="user_id" value="{{ intval($user->id) }}">
+                        <input type="hidden" name="user" value="{{ $user }}">
                         <button type="submit" class="btn btn-xs btn-primary">Promote</button>
                     </form>
                 @else
-                    <form action="{{ route('user_demote', $user->id) }}" method="POST" role="form" class="inline">
+                    <form action="{{ route('user_demote', $user) }}" method="POST" role="form" class="inline">
                         @method('PATCH')
                         @csrf
-                        <input type="hidden" name="user_id" value="{{ intval($user->id) }}">
+                        <input type="hidden" name="user" value="{{ $user }}">
                         <button type="submit" class="btn btn-xs btn-danger">Demote</button>
                     </form>
                 @endif
             </td>
             <td>
                 @if ($user->blocked === 0)
-                    <form action="{{ route('user_block', $user->id) }}" method="POST" role="form" class="inline">
+                    <form action="{{ route('user_block', $user) }}" method="POST" role="form" class="inline">
                         @method('PATCH')
                         @csrf
-                        <input type="hidden" name="user_id" value="{{ intval($user->id) }}">
+                        <input type="hidden" name="user" value="{{ $user }}">
                         <button type="submit" class="btn btn-xs btn-primary">Block</button>
                     </form>
                 @else
-                    <form action="{{ route('user_unblock', $user->id) }}" method="POST" role="form" class="inline">
+                    <form action="{{ route('user_unblock', $user) }}" method="POST" role="form" class="inline">
                         @method('PATCH')
                         @csrf
-                        <input type="hidden" name="user_id" value="{{ intval($user->id) }}">
+                        <input type="hidden" name="user_id" value="{{ $user }}">
                         <button type="submit" class="btn btn-xs btn-danger">Unblock</button>
                     </form>
                 @endif

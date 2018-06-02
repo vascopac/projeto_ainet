@@ -4,8 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Response;
+use Auth;
+use App\User;
 
-class IsAdmin
+class CanChange
 {
     /**
      * Handle an incoming request.
@@ -16,12 +18,14 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && $request->user()->admin == 1) {
+        if ($request->route('user')->id != $request->user()->id) {
             return $next($request);
         }
-        
-        $error = "You must be administrator to do that!";
 
-        return Response::make(view('home', compact('error')), 403);
+        $request->session()->flash('errors', 'You can\'t change your own type or status!');
+        $users = User::all();
+
+        return Response::make(view('users.list', compact('users')), 403);
+
     }
 }

@@ -16,89 +16,43 @@ class UserController extends Controller
         return view('users.list', compact('users'));
     }
 
-    public function promote(Request $request)
+    public function promote(User $user)
     {
-        $userId = intval($request->input('user_id'));
-        $user = User::findOrFail($userId);
-        if (is_null($user)) {
-            return redirect()->route('list');
-        }
 
-        if ($userId === Auth::id()) {
-            return redirect()->route('list');
-        }
-
-        if ($user->admin === 0) {
-            $user->admin = 1;
-        }
+        $user->admin = 1;
 
         $user->save();
 
-        return redirect()->route('list');
+        return redirect()->back();
     }
 
-    public function demote(Request $request)
+    public function demote(User $user)
     {
-        $userId = intval($request->input('user_id'));
-        $user = User::findOrFail($userId);
-        if (is_null($user)) {
-            return redirect()->route('list');
-        }
-
-        if ($userId === Auth::id()) {
-            return redirect()->route('list');
-        }
-
-        if ($user->admin === 1) {
-            $user->admin = 0;
-        }
+        
+        $user->admin = 0;
 
         $user->save();
 
-        return redirect()->route('list');
+        return redirect()->back();
     }
 
-    public function block(Request $request)
+    public function block(User $user)
     {
-        $userId = intval($request->input('user_id'));
-        $user = User::findOrFail($userId);
-        if (is_null($user)) {
-            return redirect()->route('list');
-        }
 
-        if ($userId === Auth::id()) {
-            return redirect()->route('list');
-        }
-
-        if ($user->blocked === 0) {
-            $user->blocked = 1;
-        }
+        $user->blocked = 1;
 
         $user->save();
         
-        return redirect()->route('list');
+        return redirect()->back();
     }
 
-    public function unblock(Request $request)
+    public function unblock(User $user)
     {
-        $userId = intval($request->input('user_id'));
-        $user = User::findOrFail($userId);
-        if (is_null($user)) {
-            return redirect()->route('list');
-        }
-
-        if ($userId === Auth::id()) {
-            return redirect()->route('list');
-        }
-
-        if ($user->blocked === 1) {
-            $user->blocked = 0;
-        }
-
+        $user->blocked = 0;
 
         $user->save();
         
-        return redirect()->route('list');
+        return redirect()->back();
     }
 
 }
