@@ -21,11 +21,11 @@ class UserController extends Controller
         $userId = intval($request->input('user_id'));
         $user = User::findOrFail($userId);
         if (is_null($user)) {
-            return $this->index();
+            return redirect()->route('list');
         }
 
         if ($userId === Auth::id()) {
-            return $this->index();
+            return redirect()->route('list');
         }
 
         if ($user->admin === 0) {
@@ -34,7 +34,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return $this->index();
+        return redirect()->route('list');
     }
 
     public function demote(Request $request)
@@ -42,11 +42,11 @@ class UserController extends Controller
         $userId = intval($request->input('user_id'));
         $user = User::findOrFail($userId);
         if (is_null($user)) {
-            return $this->index();
+            return redirect()->route('list');
         }
 
         if ($userId === Auth::id()) {
-            return $this->index();
+            return redirect()->route('list');
         }
 
         if ($user->admin === 1) {
@@ -55,7 +55,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return $this->index();
+        return redirect()->route('list');
     }
 
     public function block(Request $request)
@@ -63,11 +63,11 @@ class UserController extends Controller
         $userId = intval($request->input('user_id'));
         $user = User::findOrFail($userId);
         if (is_null($user)) {
-            return $this->index();
+            return redirect()->route('list');
         }
 
         if ($userId === Auth::id()) {
-            return $this->index();
+            return redirect()->route('list');
         }
 
         if ($user->blocked === 0) {
@@ -76,7 +76,7 @@ class UserController extends Controller
 
         $user->save();
         
-        return $this->index();
+        return redirect()->route('list');
     }
 
     public function unblock(Request $request)
@@ -84,11 +84,11 @@ class UserController extends Controller
         $userId = intval($request->input('user_id'));
         $user = User::findOrFail($userId);
         if (is_null($user)) {
-            return $this->index();
+            return redirect()->route('list');
         }
 
         if ($userId === Auth::id()) {
-            return $this->index();
+            return redirect()->route('list');
         }
 
         if ($user->blocked === 1) {
@@ -98,6 +98,7 @@ class UserController extends Controller
 
         $user->save();
         
-        return $this->index();
+        return redirect()->route('list');
     }
+
 }

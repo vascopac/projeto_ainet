@@ -75,12 +75,6 @@ class RegisterController extends Controller
             }while (count(User::where('profile_photo', $path)->get())>0);
             Storage::disk('public')->putFileAs('profiles', $photo, $path);
         }
-        /*if (!empty(request()->file('profile_photo'))) {
-            if (request()->file('profile_photo')->isValid()) {
-                $path= Storage::putFile('public/profiles', request()->file('profile_photo'));
-            }
-        }*/
-        
 
         return User::create([
             'name' => $data['name'],

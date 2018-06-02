@@ -10,6 +10,9 @@
         <th>Email</th>
         <th>Type</th>
         <th>Status</th>
+        <th>Promote</th>
+        <th>Block</th>
+
     </tr>
 </thead>
 <tbody>
@@ -17,8 +20,17 @@
     <tr>
         <td>{{ $user->name }}</td>
         <td>{{ $user->email }}</td>
-        <td>{{ $user->typeToStr() }}</td>
-        <td>{{ $user->statusToStr() }}</td>
+        @if ($user->admin)
+            <td class="user-is-admin">{{ $user->typeToStr() }}</td>
+        @else
+            <td>{{ $user->typeToStr() }}</td>
+        @endif
+        @if ($user->blocked)
+            <td class="user-is-blocked">{{ $user->statusToStr() }}</td>
+
+        @else
+            <td>{{ $user->statusToStr() }}</td>
+        @endif
             <td>
                 @if ($user->admin === 0)
                     <form action="{{ route('user_promote', $user->id) }}" method="POST" role="form" class="inline">

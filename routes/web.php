@@ -18,7 +18,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/users', 'UserController@index')->name('list');
+Route::get('/users', 'UserController@index')->name('list')->middleware('admin','auth');
 
 Route::patch('/users/{user}/promote', 'UserController@promote')->name('user_promote');
 
