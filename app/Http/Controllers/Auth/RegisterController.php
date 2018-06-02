@@ -54,8 +54,8 @@ class RegisterController extends Controller
             'name' => 'required|string|regex:/^[\pL\s]+$/u|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:3|confirmed',
-            'phone' => 'nullable|regex:/(9)[0-9]{8}/',
-            'profile_photo' => 'nullable|mimes:jpeg,bmp,png',
+            'phone' => 'nullable|regex:/^[0-9 +\s]+$/',
+            'profile_photo' => 'nullable|mimes:jpeg,bmp,png,jpg',
         ]);
     }
 
@@ -68,19 +68,26 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $path = null;
-        if (!empty(request()->file('profile_photo'))) {
+        if (array_key_exists('profile_photo', $data)) {
+            $photo = $data['profile_photo'];
+            do{
+                $path = str_random(32) . '.' . $photo->getClientOriginalExtension();
+            }while (count(User::where('profile_photo', $path)->get())>0);
+            Storage::disk('public')->putFileAs('profiles', $photo, $path);
+        }
+        /*if (!empty(request()->file('profile_photo'))) {
             if (request()->file('profile_photo')->isValid()) {
                 $path= Storage::putFile('public/profiles', request()->file('profile_photo'));
             }
-        }
+        }*/
         
 
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'phone' => $data['phone'],
-            'profile_photo' => $path != null ? str_replace_first('public/profiles/', '', $path) : null,
+            'phone' => $data['phone'] ?? null,
+            'profile_photo' => $path,
         ]);
     }
 }
