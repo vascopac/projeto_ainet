@@ -55,6 +55,8 @@
                                     @endif
                                     <a class="dropdown-item">Accounts</a>
                                     <a class="dropdown-item">Movements</a>
+                                    <a class="dropdown-item" href="{{ route('show_changeProfile') }}">Change profile</a>
+                                    <a class="dropdown-item" href="{{ route('show_changePass') }}">Change password</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

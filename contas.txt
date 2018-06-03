@@ -1,0 +1,23 @@
+Conta administrador:
+	mail: admin@projeto.pt
+	pass: 1234567
+
+Conta normal:
+	mail: normal@projeto.pt
+	pass: 1234567
+
+Conta bloqueada:
+	mail: block@projeto.pt
+	pass: 1234567
+
+Conta com telefone apenas:
+	mail: tele@projeto.pt
+	pass: 1234567
+
+Conta com foto apenas:
+	mail: foto@projeto.pt
+	pass: 1234567
+
+Conta com tudo:
+	mail: completo@projeto.pt
+	pass: 1234567

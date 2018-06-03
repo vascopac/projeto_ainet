@@ -7,8 +7,19 @@ use Illuminate\Http\Request;
 use Resources\Views\Users;
 use App\User;
 
+
+
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('admin');
+
+        $this->middleware('canChange')->except('index');
+    }
+
     public function index()
     {
         $users = User::all();
@@ -18,9 +29,7 @@ class UserController extends Controller
 
     public function promote(User $user)
     {
-
         $user->admin = 1;
-
         $user->save();
 
         return redirect()->back();
@@ -28,9 +37,7 @@ class UserController extends Controller
 
     public function demote(User $user)
     {
-        
         $user->admin = 0;
-
         $user->save();
 
         return redirect()->back();
@@ -38,9 +45,7 @@ class UserController extends Controller
 
     public function block(User $user)
     {
-
         $user->blocked = 1;
-
         $user->save();
         
         return redirect()->back();
@@ -49,10 +54,8 @@ class UserController extends Controller
     public function unblock(User $user)
     {
         $user->blocked = 0;
-
         $user->save();
         
         return redirect()->back();
     }
-
 }

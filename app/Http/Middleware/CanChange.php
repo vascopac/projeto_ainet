@@ -18,7 +18,7 @@ class CanChange
      */
     public function handle($request, Closure $next)
     {
-        if ($request->route('user')->id != $request->user()->id) {
+        if (Auth::id() != $request->user()->id) {
             return $next($request);
         }
 
