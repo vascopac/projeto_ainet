@@ -22,11 +22,11 @@
                     <td>{{ $account->typeToStr->name }}</td>
                     <td>{{ $account->current_balance }}</td>
                     <td>
-                        @if($account->last_movement_date == null)
+                        @if($account->canDelete() == true)
                             <form action="{{ route('account_delete', $account) }}" method="POST" role="form" class="inline">
                                 @method('DELETE')
                                 @csrf
-                                <input type="hidden" name="account_id" value="{{ $account }}">
+                                <input type="hidden" name="account" value="{{ $account }}">
                                 <button type="submit" class="btn btn-xs btn-danger">Delete</button>
                             </form>
                         @else

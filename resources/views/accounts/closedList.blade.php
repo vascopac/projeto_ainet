@@ -9,6 +9,7 @@
         <th>Code</th>
         <th>Type</th>
         <th>Current Balance</th>
+        <th>Reopen</th>
     </tr>
 </thead>
 <tbody>
@@ -20,6 +21,14 @@
                     <td>{{ $account->code }}</td>
                     <td>{{ $account->typeToStr->name }}</td>
                     <td>{{ $account->current_balance }}</td>
+                    <td>
+                        <form action="{{ route('account_reopen', $account) }}" method="POST" role="form" class="inline">
+                            @method('PATCH')
+                            @csrf
+                            <input type="hidden" name="account" value="{{ $account }}">
+                            <button type="submit" class="btn btn-xs btn-primary">Reopen</button>
+                        </form>
+                    </td>
                 </tr>
             @endif
         @endif

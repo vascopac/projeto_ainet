@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use App\User; 
 
 //US1
 Route::get('/', 'WelcomeController@statistics');
@@ -53,8 +52,14 @@ Route::get('/accounts/{user}/opened', 'AccountController@opened')->name('openedA
 Route::get('/accounts/{user}/closed', 'AccountController@closed')->name('closedAccounts_list');
 
 //US15
-Route::delete('/accounts/{account}', 'AccountController@destroy')->name('account_delete');
-Route::patch('/accounts/{account}/close', 'AccountController@close')->name('account_close');
+Route::delete('/account/{account}', 'AccountController@delete')->name('account_delete');
+Route::patch('/account/{account}/close', 'AccountController@close')->name('account_close');
+
+//US16
+Route::patch('/account/{account}/reopen', 'AccountController@reopen')->name('account_reopen');
+
+//US17
+Route::post('/account', 'AccountController@create')->name('account_create');
 
 
 

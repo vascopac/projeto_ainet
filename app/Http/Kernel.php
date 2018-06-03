@@ -62,5 +62,8 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\IsAdmin::class,
         'canChange' => \App\Http\Middleware\CanChange::class,
         'permissions' => \App\Http\Middleware\HasPermission::class,
+        'owner' => \App\Http\Middleware\IsOwner::class,
+        'canDelete' => \App\Http\Middleware\CanDelete::class,
+
     ];
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\User;
 use App\Account;
@@ -14,6 +15,10 @@ class AccountController extends Controller
         $this->middleware('auth');
 
         $this->middleware('permissions')->only('list', 'opened', 'closed');
+
+        $this->middleware('owner')->only('delete', 'close', 'reopen');
+
+        $this->middleware('canDelete')->only('delete');
     }
 
     public function list(Request $request){
@@ -43,12 +48,25 @@ class AccountController extends Controller
         return view('accounts.closedList', compact('users', 'accounts', 'account_types'));
     }
     
-    /*public function destroy(Request $request){
-        $accountId = $request->route('account');
-        $account = Account::findOrFail($accountId);
-        if ($account->last_movement_date() == null){
-            $account->delete();
-        }
+    public function delete(Request $request){
+        $account = Account::findOrFail($request->route('account'));
+        $account->delete();
         return redirect()->back();
-    }*/
+    }
+
+    public function close(Request $request){
+        $account = Account::findOrFail($request->route('account'));
+        $account->deleted_at = Carbon::now();
+        $account->save();
+        return redirect()->back();
+    }
+
+    public function reopen(Request $request){
+        $account = Account::findOrFail($request->route('account'));
+        $account->deleted_at = null;
+        $account->save();
+        return redirect()->back();
+    }
+
+
 }

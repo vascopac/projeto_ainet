@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
+    public $timestamps = false;
+
     public function typeToStr(){
         return $this->hasOne('App\AccountType','id', 'account_type_id');
     }
@@ -16,5 +18,18 @@ class Account extends Model
     		return false;
     	}
     	return true;
+    }
+
+    public function canDelete()
+    {
+        if (count($this->movements()->get()) == 0 && $this->last_movement_date == null) {
+            return true;
+        }
+        return false;
+    }
+
+    public function movements()
+    {
+        return $this->hasMany('App\Movement');
     }
 }
