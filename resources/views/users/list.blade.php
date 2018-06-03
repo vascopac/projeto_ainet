@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-@if (DB::table('users')->count())
+@if (DB::table('users')->count() != 0)
 
 <table class="table table-striped">
 <thead>

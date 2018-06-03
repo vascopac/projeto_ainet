@@ -19,7 +19,7 @@ Route::get('/', 'WelcomeController@statistics');
 Auth::routes();
 
 //US5
-Route::get('/users', 'UserController@index')->name('list');
+Route::get('/users', 'UserController@index')->name('admin_list');
 
 //US7
 Route::patch('/users/{user}/promote', 'UserController@promote')->name('user_promote');
@@ -37,4 +37,34 @@ Route::patch('/me/password', 'PasswordController@changePassword')->name('change_
 //US10
 Route::get('/me/profile', 'ProfileController@index')->name('show_changeProfile');
 Route::put('/me/profile', 'ProfileController@changeProfile')->name('change_profile');
+
+//US11
+Route::get('/profiles', 'UserController@getProfiles')->name('profile_list');
+
+//US12
+Route::get('/me/associates', 'UserController@getAssociates')->name('associates');
+
+//US13
+Route::get('/me/associate-of', 'UserController@getAssociateOf')->name('associateOf');
+
+//US14
+Route::get('/accounts/{user}', 'AccountController@list')->name('accounts_list');
+Route::get('/accounts/{user}/opened', 'AccountController@opened')->name('openedAccounts_list');
+Route::get('/accounts/{user}/closed', 'AccountController@closed')->name('closedAccounts_list');
+
+//US15
+Route::delete('/accounts/{account}', 'AccountController@destroy')->name('account_delete');
+Route::patch('/accounts/{account}/close', 'AccountController@close')->name('account_close');
+
+
+
+
+
+
+
+
+
+
+
+
 
