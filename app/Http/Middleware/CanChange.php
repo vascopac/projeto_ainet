@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
-use Auth;
 use App\User;
 
 class CanChange
@@ -18,7 +18,8 @@ class CanChange
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::id() != $request->user()->id) {
+
+        if (Auth::user()->id != $request->route('user')->id) {
             return $next($request);
         }
 

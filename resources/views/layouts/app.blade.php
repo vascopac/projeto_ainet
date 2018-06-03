@@ -53,13 +53,8 @@
                                     @if (Auth::user()->admin > 0)
                                         <a class="dropdown-item" href="{{ route('admin_list') }}">Admin List</a>
                                     @endif
-                                    <a class="dropdown-item" href="{{ route('profile_list') }}">Profiles List</a>
-                                    <a class="dropdown-item" href="{{ route('associates') }}">Associates List</a>
-                                    <a class="dropdown-item" href="{{ route('associateOf') }}">Associate Of List</a>
-                                    <a class="dropdown-item" href="{{ route('accounts_list', Auth::id()) }}">Accounts</a>
-                                    <a class="dropdown-item" href="{{ route('openedAccounts_list', Auth::id()) }}">Accounts open</a>
-                                    <a class="dropdown-item" href="{{ route('closedAccounts_list', Auth::id()) }}">Accounts closed</a>
-                                    <a class="dropdown-item">Movements</a>
+                                    <a class="dropdown-item" href="{{ route('profile_list') }}">Profiles</a>
+                                    <a class="dropdown-item" href="{{ route('accounts_list', Auth::user()->id) }}">Accounts</a>
                                     <a class="dropdown-item" href="{{ route('show_changeProfile') }}">Change profile</a>
                                     <a class="dropdown-item" href="{{ route('show_changePass') }}">Change password</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"

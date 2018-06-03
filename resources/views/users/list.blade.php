@@ -12,7 +12,6 @@
         <th>Status</th>
         <th>Promote</th>
         <th>Block</th>
-
     </tr>
 </thead>
 <tbody>

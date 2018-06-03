@@ -59,7 +59,12 @@ Route::patch('/account/{account}/close', 'AccountController@close')->name('accou
 Route::patch('/account/{account}/reopen', 'AccountController@reopen')->name('account_reopen');
 
 //US17
-Route::post('/account', 'AccountController@create')->name('account_create');
+Route::get('/account', 'AccountController@create')->name('account_create_index');
+Route::post('/account', 'AccountController@store')->name('account_create');
+
+//US18
+Route::get('/account/{account}', 'AccountController@edit')->name('account_edit_index');
+Route::put('/account/{account}', 'AccountController@update')->name('account_edit');
 
 
 

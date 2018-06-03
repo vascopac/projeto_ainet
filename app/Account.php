@@ -6,9 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
+    protected $fillable = [
+        'owner_id','account_type_id', 'code','date','start_balance','current_balance','description'
+    ];
+
     public $timestamps = false;
 
-    public function typeToStr(){
+    public function type(){
         return $this->hasOne('App\AccountType','id', 'account_type_id');
     }
 

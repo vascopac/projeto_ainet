@@ -13,7 +13,7 @@ class UserController extends Controller
     {
         $this->middleware('auth');
 
-        $this->middleware('admin')->only('promote', 'demote', 'block', 'unblock');
+        $this->middleware('admin')->only('index', 'promote', 'demote', 'block', 'unblock');
 
         $this->middleware('canChange')->only('promote', 'demote', 'block', 'unblock');
     }
